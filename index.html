@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <title>Alien stage</title>
-</head>
-<body> 
 
-<!DOCTYPE html>
-<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 24px;
-      }
-    }
-  </style>
     <title>Alien Stage | Последнее Шоу Человечества</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Forum&display=swap" rel="stylesheet">
     <style>
+        /* Радужный градиент сверху */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(to right,
+                    rgba(93, 139, 197, 0.5),
+                    /* Полупрозрачный синий */
+                    rgba(118, 219, 231, 0.5),
+                    /* Полупрозрачный голубой */
+                    rgba(122, 185, 177, 0.6),
+                    /* Полупрозрачный зеленый */
+                    rgba(245, 236, 178, 0.5),
+                    /* Полупрозрачный желтый */
+                    rgba(255, 197, 113, 0.5),
+                    /* Полупрозрачный оранжевый */
+                    rgba(238, 162, 191, 0.5)
+                    /* Полупрозрачный розовый */
+                );
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding-top: 100px;
+        }
+
         :root {
             --font-header: 'Forum', serif;
             --font-main: 'Georgia', serif;
@@ -59,7 +69,9 @@
         }
 
         /* Typography */
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             font-family: var(--font-header);
             text-transform: uppercase;
             text-align: center;
@@ -78,10 +90,12 @@
             align-items: center;
             padding: 20px;
             text-align: center;
-            border-bottom: 1px solid #1a1a1a;
         }
 
-        .hero h1 { font-size: 5rem; margin-bottom: 20px; }
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
 
         .hero p {
             max-width: 700px;
@@ -108,7 +122,6 @@
             display: flex;
             align-items: center;
             padding: 5% 10%;
-            border-bottom: 1px solid #1a1a1a;
         }
 
         .character-banner:nth-child(even) {
@@ -120,8 +133,14 @@
             padding: 40px;
         }
 
-        .char-info h2 { font-size: 3rem; text-align: left; }
-        .character-banner:nth-child(even) .char-info h2 { text-align: right; }
+        .char-info h2 {
+            font-size: 3rem;
+            text-align: left;
+        }
+
+        .character-banner:nth-child(even) .char-info h2 {
+            text-align: right;
+        }
 
         .char-origin {
             font-family: var(--font-header);
@@ -130,7 +149,10 @@
             display: block;
         }
 
-        .char-bio { margin-bottom: 20px; font-size: 1.1rem; }
+        .char-bio {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
 
         .char-traits {
             list-style: none;
@@ -155,7 +177,6 @@
             margin: 60px auto;
             background: transparent;
             color: #fff;
-            border: 1px solid #fff;
             padding: 15px 40px;
             font-family: var(--font-header);
             text-transform: uppercase;
@@ -173,16 +194,14 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 1s ease-out;
-            background: #050505;
         }
 
         #rounds-section.visible {
-            max-height: none ;
+            max-height: none;
         }
 
         .round-card {
             padding: 100px 20px;
-            border-bottom: 1px solid #1a1a1a;
             max-width: 1000px;
             margin: 0 auto;
         }
@@ -208,10 +227,21 @@
             margin-bottom: 15px;
         }
 
-        .competitor.winner img { border-color: var(--winner-color); filter: drop-shadow(0 0 10px var(--winner-color)); }
-        .competitor.loser img { border-color: var(--loser-color); filter: grayscale(1) opacity(0.5); }
+        .competitor.winner img {
+            border-color: var(--winner-color);
+            filter: drop-shadow(0 0 10px var(--winner-color));
+        }
 
-        .vs-text { font-family: var(--font-header); font-size: 2rem; color: #555; }
+        .competitor.loser img {
+            border-color: var(--loser-color);
+            filter: grayscale(1) opacity(0.5);
+        }
+
+        .vs-text {
+            font-family: var(--font-header);
+            font-size: 2rem;
+            color: #555;
+        }
 
         .round-desc {
             text-align: center;
@@ -225,7 +255,6 @@
         .final-quote {
             padding: 150px 20px;
             text-align: center;
-            background: linear-gradient(to bottom, #000, #0a0a0a);
         }
 
         .final-quote blockquote {
@@ -247,23 +276,50 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .character-banner, .character-banner:nth-child(even) { flex-direction: column; height: auto; padding: 40px 20px; }
-            .hero h1 { font-size: 3rem; }
-            .vs-container { flex-direction: column; gap: 40px; }
+
+            .character-banner,
+            .character-banner:nth-child(even) {
+                flex-direction: column;
+                height: auto;
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .vs-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            background: black;
         }
     </style>
 </head>
+
 <body>
+    <canvas id="starfield"></canvas>
 
     <section class="hero">
         <h1>Alien Stage</h1>
         <p>
-            Человечество оказалось в ловушке: Сад стал клеткой, а сцена - цирком, где люди существуют лишь для развлечения пришельцев. Подопытные сражаются в музыкальных раундах, а любовь, дружба и амбиции сталкиваются с жестокостью системы. Музыка становится их оружием, а победы и поражения - борьбой за свободу и надежду.
+            Человечество оказалось в ловушке: Сад стал клеткой, а сцена - цирком, где люди существуют лишь для
+            развлечения пришельцев. Подопытные сражаются в музыкальных раундах, а любовь, дружба и амбиции сталкиваются
+            с жестокостью системы. Музыка становится их оружием, а победы и поражения - борьбой за свободу и надежду.
         </p>
-      <p>
+        <p>
             "Эта вселенная сияет звездами мечтаний, рожденных в вакууме прошлого..."
         </p>
-       
+
     </section>
 
     <section id="characters">
@@ -272,21 +328,21 @@
                 <span class="char-origin">Anakt Garden - Подопытная №1</span>
                 <h2>Mizi</h2>
                 <p class="char-bio">
-                    Яркая и искренняя, Мизи верила в любовь даже в стенах клетки. Её голос несет в себе надежду, 
+                    Яркая и искренняя, Мизи верила в любовь даже в стенах клетки. Её голос несет в себе надежду,
                     которая кажется инопланетным зрителям лишь забавной диковинкой.
                 </p>
                 <ul class="char-traits">
                     <li>Любимый цвет: Розовый</li>
                     <li>Особенность: Неисправимый оптимизм в аду</li>
                     <li>Связь: Суа — её единственный смысл</li>
-                  <li>Темперамент: Сангвиничный</li>
-                  <li>Факт: Всегда видит свет даже в самой темной клетке</li>
+                    <li>Темперамент: Сангвиничный</li>
+                    <li>Факт: Всегда видит свет даже в самой темной клетке</li>
                 </ul>
             </div>
             <div class="char-image-container">
                 <div class="char-image-container">
-    <img src="https://i.postimg.cc/D0Lmzsh1/photo-5199965211224380027-y.jpg" alt="Mizi">
-</div>
+                    <img src="https://i.postimg.cc/D0Lmzsh1/photo-5199965211224380027-y.jpg" alt="Mizi">
+                </div>
             </div>
         </div>
 
@@ -295,21 +351,21 @@
                 <span class="char-origin">Anakt Garden - Подопытная №2</span>
                 <h2>Sua</h2>
                 <p class="char-bio">
-                    Холодная рассудительность и скрытая нежность. Суа знала цену свободы в мире, где 
+                    Холодная рассудительность и скрытая нежность. Суа знала цену свободы в мире, где
                     выживает лишь один. Её спокойствие было щитом для той, кого она любила больше жизни.
                 </p>
                 <ul class="char-traits">
                     <li>Любимый цвет: Белый</li>
                     <li>Особенность: Молчаливая, но глубоко привязана к Миззи</li>
                     <li>Связь: Миззи - не просто подруга, а смысл ее мира, борьбы</li>
-                  <li>Темперамент: Меланхоличный</li>
-                  <li>Факт: Обладательница самого чистого тембра в саду</li>
+                    <li>Темперамент: Меланхоличный</li>
+                    <li>Факт: Обладательница самого чистого тембра в саду</li>
                 </ul>
             </div>
             <div class="char-image-container">
                 <div class="char-image-container">
-    <img src="https://i.postimg.cc/wvKpjrjV/photo-5199965211224380031-y.jpg" alt="Sua">
-</div>
+                    <img src="https://i.postimg.cc/wvKpjrjV/photo-5199965211224380031-y.jpg" alt="Sua">
+                </div>
             </div>
         </div>
 
@@ -318,92 +374,96 @@
                 <span class="char-origin">Anakt Garden - Подопытный №3</span>
                 <h2>Till</h2>
                 <p class="char-bio">
-                    Бунтарь с израненной душой. Тилль выражает свою ярость через грубые аккорды и крик, 
+                    Бунтарь с израненной душой. Тилль выражает свою ярость через грубые аккорды и крик,
                     отказываясь становиться послушной куклой. Его музыка — это акт неповиновения.
                 </p>
                 <ul class="char-traits">
-                     <li>Любимый цвет: Бирюзовый</li>
+                    <li>Любимый цвет: Бирюзовый</li>
                     <li>Особенность: Искренне верит в свободу и музыку, даже когда мир разорван чужеродным ужасом</li>
                     <li>Связь: Мизи — его давняя мечта и объект глубокой, но часто неразделённой любви</li>
-                  <li>Темперамент: Меланходичный</li>
-                  <li>Факт: Считает, что музыка может говорить вместо слов</li>
+                    <li>Темперамент: Меланходичный</li>
+                    <li>Факт: Считает, что музыка может говорить вместо слов</li>
                 </ul>
             </div>
             <div class="char-image-container">
                 <div class="char-image-container">
-    <img src="https://i.postimg.cc/RZzbsnZY/photo-5199965211224380106-y.jpg" alt="Till">
-</div>
+                    <img src="https://i.postimg.cc/RZzbsnZY/photo-5199965211224380106-y.jpg" alt="Till">
+                </div>
             </div>
-      </div>
-          <div class="character-banner">
+        </div>
+        <div class="character-banner">
             <div class="char-info">
                 <span class="char-origin">Anakt Garden - Подопытный №4</span>
                 <h2>Ivan</h2>
                 <p class="char-bio">
-                    Иван — загадочный конкурент, часто напряжённо борющийся со своими эмоциями. Он умеет быть обаятельным и холодным одновременно, что делает его притягательным, но сложно читаемым. Его одержимость Till’ом придаёт истории трагический подтекст.
+                    Иван — загадочный конкурент, часто напряжённо борющийся со своими эмоциями. Он умеет быть
+                    обаятельным и холодным одновременно, что делает его притягательным, но сложно читаемым. Его
+                    одержимость Till’ом придаёт истории трагический подтекст.
                 </p>
                 <ul class="char-traits">
-                     <li>Любимый цвет: Черный</li>
+                    <li>Любимый цвет: Черный</li>
                     <li>Особенность: Пытается понять любовь через силу, страсть и жесткость</li>
                     <li>Связь: Тилл — объект его глубокой и часто односторонней привязанности</li>
-                  <li>Темперамент: Холерический</li>
-                  <li>Факт: Никогда не скрывает эмоций на сцене</li>
+                    <li>Темперамент: Холерический</li>
+                    <li>Факт: Никогда не скрывает эмоций на сцене</li>
                 </ul>
             </div>
             <div class="char-image-container">
-    <img src="https://i.postimg.cc/BvdR57kg/photo-5199965211224380257-y.jpg" alt="Ivan">
-</div>
+                <img src="https://i.postimg.cc/BvdR57kg/photo-5199965211224380257-y.jpg" alt="Ivan">
             </div>
-        </div> 
-          
-          <div class="character-banner">
+        </div>
+        </div>
+
+        <div class="character-banner">
             <div class="char-info">
                 <span class="char-origin">Anakt Garden - Подопытный №5</span>
                 <h2>Luka</h2>
                 <p class="char-bio">
-                    Лука — опытный и хитрый участник, который знает, как играть не только музыку, но и сердца. Он использует психологические и эмоциональные тактики, чтобы выжить и побеждать. Несмотря на свою харизму, он часто остаётся фигурой противоречий.
+                    Лука — опытный и хитрый участник, который знает, как играть не только музыку, но и сердца. Он
+                    использует психологические и эмоциональные тактики, чтобы выжить и побеждать. Несмотря на свою
+                    харизму, он часто остаётся фигурой противоречий.
                 </p>
                 <ul class="char-traits">
                     <li>Любимый цвет: Фиолетовый</li>
                     <li>Особенность: Холодная харизма и стратегическая жестокость</li>
                     <li>Связь: Конфликтует с Миззи, неоднозначно связан с другими участниками</li>
-                  <li>Темперамент: Холерический</li>
-                  <li>Факт: Стратег, который всегда на шаг впереди других</li>
+                    <li>Темперамент: Холерический</li>
+                    <li>Факт: Стратег, который всегда на шаг впереди других</li>
                 </ul>
             </div>
             <div class="char-image-container">
-    <img src="https://i.postimg.cc/brNXdD4W/photo-5199965211224380036-y.jpg" alt="Till">
-</div>
+                <img src="https://i.postimg.cc/brNXdD4W/photo-5199965211224380036-y.jpg" alt="Till">
             </div>
         </div>
-          
-          <div class="character-banner">
+        </div>
+
+        <div class="character-banner">
             <div class="char-info">
                 <span class="char-origin">Anakt Garden - Подопытная №***</span>
                 <h2>Hyuna</h2>
                 <p class="char-bio">
-                    Hyuna — сильная, решительная и смелая персонажка, выступающая не только на сцене, но и вне её, как часть восстания. Её действия оказывают огромное влияние на судьбу остальных участников.
+                    Hyuna — сильная, решительная и смелая персонажка, выступающая не только на сцене, но и вне её, как
+                    часть восстания. Её действия оказывают огромное влияние на судьбу остальных участников.
                 </p>
                 <ul class="char-traits">
-                     <li>Любимый цвет: Красный</li>
+                    <li>Любимый цвет: Красный</li>
                     <li>Особенность: Лидер сопротивления, способная дать надежду другим</li>
                     <li>Связь: Играет важную роль в спасении Mizi</li>
-                  <li>Темперамент: сангвинический</li>
-                  <li>Факт: бывшая подопытная, отказавшаяся оставаться экспериментом.</li>
+                    <li>Темперамент: сангвинический</li>
+                    <li>Факт: бывшая подопытная, отказавшаяся оставаться экспериментом.</li>
                 </ul>
             </div>
             <div class="char-image-container">
-    <img src="https://i.postimg.cc/Qd6qrBqf/hena.jpg" alt="Hyuna">
-</div>
+                <img src="https://i.postimg.cc/Qd6qrBqf/hena.jpg" alt="Hyuna">
             </div>
         </div>
-          
-          
+        </div>
+
+
         </div>
     </section>
 
-    <button class="results-toggle"
-            onclick="toggleRounds()">Показать результаты раундов</button>
+    <button class="results-toggle" onclick="toggleRounds()">Показать результаты раундов</button>
 
     <section id="rounds-section">
         <div class="round-card">
@@ -421,8 +481,9 @@
             </div>
             <div class="round-desc">
                 <p>Песня: <strong>"My Clematis"</strong></p>
-                <p>Трагическое столкновение двух самых близких душ. Суа принимает решение, которое навсегда изменит судьбу Мизи, оставляя сцену в крови и слезах.</p>
-              <p>"Если вера единственное что делает меня человеком, то мне остается только верить."</p>
+                <p>Трагическое столкновение двух самых близких душ. Суа принимает решение, которое навсегда изменит
+                    судьбу Мизи, оставляя сцену в крови и слезах.</p>
+                <p>"Если вера единственное что делает меня человеком, то мне остается только верить."</p>
             </div>
         </div>
 
@@ -441,8 +502,9 @@
             </div>
             <div class="round-desc">
                 <p>Песня: <strong>"Unknown"</strong></p>
-                <p>Любовь Тилла дает ему силу одержать чистую победу над Aкорном. Каждое его движение и нота наполнены эмоцией, а музой его песен навсегда остается Мизи.</p>
-             <p>"Мелодия что заполняла пустого меня - это ты"</p>
+                <p>Любовь Тилла дает ему силу одержать чистую победу над Aкорном. Каждое его движение и нота наполнены
+                    эмоцией, а музой его песен навсегда остается Мизи.</p>
+                <p>"Мелодия что заполняла пустого меня - это ты"</p>
             </div>
         </div>
 
@@ -461,11 +523,12 @@
             </div>
             <div class="round-desc">
                 <p>Песня: <strong>"Black Sorrow"</strong></p>
-                <p>Черная тоска по любимому Тиллу, с которым Иван никогда не будет вместе, ведь сердце его отдано другой помогает Ивану получить легкую победу в этоим раунде.</p>
-              <p>"Ты для меня черная тоска"</p>
+                <p>Черная тоска по любимому Тиллу, с которым Иван никогда не будет вместе, ведь сердце его отдано другой
+                    помогает Ивану получить легкую победу в этоим раунде.</p>
+                <p>"Ты для меня черная тоска"</p>
             </div>
-      </div>
-             
+        </div>
+
         <div class="round-card">
             <h3>Раунд 4</h3>
             <div class="vs-container">
@@ -481,10 +544,11 @@
             </div>
             <div class="round-desc">
                 <p>Песня: <strong>-</strong></p>
-                <p>Оффициально песни 4 раунда не существует хотя итогом невероятный проффесионализм и хладнокровие Луки дарит ему легкую победу над очередным противником</p>
+                <p>Оффициально песни 4 раунда не существует хотя итогом невероятный проффесионализм и хладнокровие Луки
+                    дарит ему легкую победу над очередным противником</p>
             </div>
-      </div>
-                
+        </div>
+
         <div class="round-card">
             <h3>Раунд 5</h3>
             <div class="vs-container">
@@ -500,11 +564,13 @@
             </div>
             <div class="round-desc">
                 <p>Песня: <strong>"Ruler of my heart"</strong></p>
-                <p>Против проффесионала своего дела у, сломленной от потери близкой подруги, Мизи не было шансов, она проиграла как только вышла на сцену. Но ее от смерти спасла группа повстанцев во главе которой была Хёна, бывшая возлюбленная Луки.</p>
-              <p>"Когда тьма окружает позволь мне убрать ее."</p>
+                <p>Против проффесионала своего дела у, сломленной от потери близкой подруги, Мизи не было шансов, она
+                    проиграла как только вышла на сцену. Но ее от смерти спасла группа повстанцев во главе которой была
+                    Хёна, бывшая возлюбленная Луки.</p>
+                <p>"Когда тьма окружает позволь мне убрать ее."</p>
             </div>
-      </div>
-      
+        </div>
+
         <div class="round-card">
             <h3>Раунд 6</h3>
             <div class="vs-container">
@@ -520,11 +586,13 @@
             </div>
             <div class="round-desc">
                 <p>Песня: <strong>"Cure"</strong></p>
-                <p>Тилл не хотел сражаться думая что его любимая Мизи погибла. Он саботировал свое выступление и когда уже все думали что он проиграл, Иван, который не хотел видеть как его "черная тоска" умрет, устроил драку, тем самым нарушив правила и отдав победу Тиллу. Его первый поцелуй стал последним.</p>
-              <p>"Поглоти же меня"</p>
+                <p>Тилл не хотел сражаться думая что его любимая Мизи погибла. Он саботировал свое выступление и когда
+                    уже все думали что он проиграл, Иван, который не хотел видеть как его "черная тоска" умрет, устроил
+                    драку, тем самым нарушив правила и отдав победу Тиллу. Его первый поцелуй стал последним.</p>
+                <p>"Поглоти же меня"</p>
             </div>
-      </div>
-      
+        </div>
+
         <div class="round-card">
             <h3>Раунд 7</h3>
             <div class="vs-container">
@@ -540,9 +608,13 @@
             </div>
             <div class="round-desc">
                 <p>Песня: <strong>"Blink gone"</strong></p>
-                <p>Тилл был готов сделать все чтобы жертва Ивана оказалась не напрасна, но в самом конце раунда в толпе он увидит живую Мизи. Эмоции нахлынут на него из за чего он не сможет победить. Он умрет на глазах Мизи которая так и не успела сказать что любит его. Для Луки эта победа тоже не принесет счастья,ведь вскоре он увидится с Хеной, своей бывшей возлюбленной, которая пришла чтоб спасти Тилла.</p>
-              <p>"Моргнул и он исчез, не пропусти этот момент."</p>
-          </div>
+                <p>Тилл был готов сделать все чтобы жертва Ивана оказалась не напрасна, но в самом конце раунда в толпе
+                    он увидит живую Мизи. Эмоции нахлынут на него из за чего он не сможет победить. Он умрет на глазах
+                    Мизи которая так и не успела сказать что любит его. Для Луки эта победа тоже не принесет
+                    счастья,ведь вскоре он увидится с Хеной, своей бывшей возлюбленной, которая пришла чтоб спасти
+                    Тилла.</p>
+                <p>"Моргнул и он исчез, не пропусти этот момент."</p>
+            </div>
         </div>
     </section>
 
@@ -557,9 +629,9 @@
         function toggleRounds() {
             const section = document.getElementById('rounds-section');
             const button = document.querySelector('.results-toggle');
-            
+
             section.classList.toggle('visible');
-            
+
             if (section.classList.contains('visible')) {
                 button.textContent = 'Скрыть результаты раундов';
                 section.scrollIntoView({ behavior: 'smooth' });
@@ -568,63 +640,56 @@
             }
         }
     </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="wight=device-widht, initial-scale = 1.0" 
-        <title>Alien stage</title>
-  <link href="https://fonts.googleapis.com" rel="stylesheet">
-  <style>
-    /* Переменные */
-    :root {
-        --bg-color: #000000;
-        --font-main: 'Unica One', serif;
-    }
+    <script>
+        const canvas = document.getElementById("starfield");
+        const ctx = canvas.getContext("2d");
 
-    body {
-        margin: 0;
-        background-color: var(--bg-color);
-        /* Звезды */
-        background-image: 
-            radial-gradient(1px 1px at 25px 50px, #fff, transparent),
-            radial-gradient(1px 1px at 75px 120px, #fff, transparent),
-            radial-gradient(2px 2px at 150px 200px, #ddd, transparent);
-        background-size: 250px 250px;
-        color: #e0e0e0;
-        font-family: var(--font-main);
-        min-height: 100vh;
-        position: relative;
-    }
-/* Радужный градиент сверху */
-    body::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 400px;
-        background: linear-gradient(to right, 
-        rgba(93, 139, 197, 0.5),    /* Полупрозрачный синий */
-        rgba(118, 219, 231, 0.5),  /* Полупрозрачный голубой */
-        rgba(122, 185, 177, 0.6),    /* Полупрозрачный зеленый */
-        rgba(245, 236, 178, 0.5),  /* Полупрозрачный желтый */
-        rgba(255, 197, 113, 0.5),  /* Полупрозрачный оранжевый */
-        rgba(238, 162, 191, 0.5) /* Полупрозрачный розовый */
-    );
-       -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
-        mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
-        z-index: 0;
-    }
+        let stars = [];
+        const STAR_COUNT = 250;
 
-    .content {
-        position: relative;
-        z-index: 1;
-        text-align: center;
-        padding-top: 100px;
-    }
-  </style>
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resize);
+        resize();
+
+        function createStars() {
+            stars = [];
+            for (let i = 0; i < STAR_COUNT; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2,
+                    speed: Math.random() * 0.7 + 0.2
+                });
+            }
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "white";
+
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                star.y += star.speed;
+
+                if (star.y > canvas.height) {
+                    star.y = 0;
+                    star.x = Math.random() * canvas.width;
+                }
+            });
+
+            requestAnimationFrame(drawStars);
+        }
+
+        createStars();
+        drawStars();
+    </script>
 
 </body>
+
 </html>
